@@ -1,0 +1,622 @@
+<div id="my-little-form">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous">
+    </script>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+
+    <style> 
+        /* --------- Código do CheckBox Interativo --------- */
+        .cbx {
+            position: relative;
+            top: 1px;
+            width: 45px;
+            height: 17px;
+            border: 1px solid #c8ccd4;
+            border-radius: 3px;
+            vertical-align: middle;
+            transition: background 0.1s ease;
+            cursor: pointer;
+            background: #B27E17;
+            margin-left: 2px;
+        }
+        .cbx:after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 5px;
+            width: 5px;
+            height: 11px;
+            opacity: 0;
+            transform: rotate(45deg) scale(0);
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            transition: all 0.3s ease;
+            transition-delay: 0.15s;
+        }
+        .lbl {
+            margin-left: 5px;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        #cbx:checked ~ .cbx {
+            border-color: transparent;
+            background: #144b9b;
+            animation: jelly 0.6s ease;
+        }
+        #cbx:checked ~ .cbx:after {
+            opacity: 1;
+            transform: rotate(45deg) scale(1);
+        }
+        .cntr {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+    <style scoped=""> 
+            /*/
+            ///////////// [ FONT ]*/
+            @import url('https://fonts.googleapis.com/css?family=Poppins');
+            /*/
+            ///////////////////////////////////////////////////////////////// [ RESTYLE TAG ]*/
+            * {
+                margin: 0px;
+                padding: 0px;
+                box-sizing: border-box;
+            }
+            .formulario-sales-force-container {
+                font-family: 'Poppins', sans-serif;
+                font-weight: regular;
+            }
+            /*---------------------------------------------*/
+            h1,h2,h3,h4,h5,h6 {
+                margin: 0px;
+            }
+            /*---------------------------------------------*/
+            button {
+                outline: none !important;
+                border: none;
+                background: transparent;
+            }
+            button:hover {
+                cursor: pointer;
+            }
+            iframe {
+                border: none !important;
+            }
+            /*/
+            ///////////////////////////////////////////////////////////////// [ Contact 2 ]*/
+            .bg-contact2 {
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover;
+            }
+            .container-contact2 {
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                margin-top: 0;
+                padding: 20px;
+                background: white;
+            }
+            .wrap-contact2 {
+                max-width:300px;
+                background: #e5e5e5;
+                border-radius: 10px;
+                overflow: hidden;
+                padding: 40px;
+                box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.1);
+            }
+            /*------------------------------------------------------------------ [ ]*/
+            .contact2-form {
+                width: 10%;
+            }
+            .contact2-form-title {
+                display: block;
+                font-family: 'Poppins';
+                font-weight: bold;
+                font-size: 25px;
+                color: #fff;
+                line-height: 1.2;
+                text-align: center;
+                padding-bottom: 40px;
+            }
+            /*------------------------------------------------------------------ [ ]*/
+            .wrap-input2 {
+                width: 100%;
+                position: relative;
+                border-bottom: 2px solid #595959;
+                margin-bottom: 20px;
+                background: #e5e5e5;
+                color: white;
+            }
+            .input2 {
+                display: block;
+                width: 100%;
+                font-family: 'Poppins';
+                font-size: 13px;
+                color: white;
+                line-height: 1.2;
+            }
+            .focus-input2 {
+                position: absolute;
+                display: block;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+            }
+            .focus-input2::before {
+                content: "";
+                display: block;
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                -webkit-transition: all 0.4s;
+                -o-transition: all 0.4s;
+                -moz-transition: all 0.4s;
+                transition: all 0.4s;
+                background: rgba(219,21,99,1);
+                background: -webkit-linear-gradient(45deg, #595959, #000);
+                background: -o-linear-gradient(45deg, #595959, #000);
+                background: -moz-linear-gradient(45deg, #595959, #000);
+                background: linear-gradient(45deg, #595959, #000);
+            }
+            .focus-input2::after {
+                content: attr(data-placeholder);
+                display: block;
+                width: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0;
+                color: #0D3968;
+                font-family: 'Poppins';
+                font-weight: regular;
+                font-size: 13px;
+                color: #595959;
+                line-height: 1.2;
+                -webkit-transition: all 0.4s;
+                -o-transition: all 0.4s;
+                -moz-transition: all 0.4s;
+                transition: all 0.4s;
+            }
+            /*---------------------------------------------*/
+            input.input2 {
+                height: 45px;
+                color: #595959;
+            }
+            input.input2 + .focus-input2::after {
+                top: 16px;
+                left: 0;
+                color: #595959;
+            }
+            textarea.input2 {
+                min-height: 115px;
+                padding-top: 13px;
+                padding-bottom: 13px;
+                color: #595959;
+            }
+            textarea.input2 + .focus-input2::after {
+                top: 16px;
+                left: 0;
+                color: #595959;
+            }
+            .input2:focus + .focus-input2::after {
+                top: -13px;
+                color: #595959;
+            }
+            .input2:focus + .focus-input2::before {
+                width: 100%;
+                color: #595959;
+            }
+            .has-val.input2 + .focus-input2::after {
+                top: -13px;
+                color: #cacaca;
+            }
+            .has-val.input2 + .focus-input2::before {
+                width: 100%;
+                color: #cacaca;
+            }
+            /*------------------------------------------------------------------ [ Button ]*/
+            .container-contact2-form-btn {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -moz-box;
+                display: -ms-flexbox;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .wrap-contact2-form-btn {
+                display: block;
+                position: relative;
+                z-index: 1;
+                width: auto;
+                overflow: hidden;
+                margin: 0 auto;
+            }
+            .contact2-form-bgbtn {
+                position: absolute;
+                z-index: -1;
+                width: 300%;
+                height: 100%;
+                background: rgba(219,21,99,1);
+                background: -webkit-linear-gradient(-135deg, #0D3968, #144b9b, #0D3968, #144b9b);
+                background: -o-linear-gradient(-135deg, #0D3968, #144b9b, #0D3968, #144b9b);
+                background: -moz-linear-gradient(-135deg, #0D3968, #144b9b, #0D3968, #144b9b);
+                background: linear-gradient(-135deg, #0D3968, #144b9b, #0D3968, #144b9b);
+                top: 0;
+                left: -100%;
+                -webkit-transition: all 0.4s;
+                -o-transition: all 0.4s;
+                -moz-transition: all 0.4s;
+                transition: all 0.4s;
+            }
+            .contact2-form-btn {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -moz-box;
+                display: -ms-flexbox;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 10px;
+                min-width: 100px;
+                height: 50px;
+                font-family: 'Poppins';
+                font-weight: medium;
+                font-size: 16px;
+                color: #fff;
+                line-height: 1.2;
+            }
+            .wrap-contact2-form-btn:hover .contact2-form-bgbtn {
+                left: 0;
+            }
+            /*------------------------------------------------------------------ [ Responsive ]*/
+            @media (max-width: 576px) {
+                .wrap-contact2 {
+                    padding: 20px;
+                }
+            }
+            /*------------------------------------------------------------------ [ Alert validate ]*/
+            .validate-input {
+                position: relative;
+            }
+            .alert-validate::before {
+                content: attr(data-validate);
+                position: absolute;
+                max-width: 70%;
+                background-color: white;
+                border: 1px solid #c80000;
+                border-radius: 2px;
+                padding: 4px 25px 4px 10px;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+                right: 0px;
+                pointer-events: none;
+                font-family: 'Poppins';
+                font-weight: regular;
+                color: #c80000;
+                font-size: 13px;
+                line-height: 1.4;
+                text-align: left;
+                visibility: hidden;
+                opacity: 0;
+                -webkit-transition: opacity 0.4s;
+                -o-transition: opacity 0.4s;
+                -moz-transition: opacity 0.4s;
+                transition: opacity 0.4s;
+            }
+            .alert-validate::after {
+                content: "\f12a";
+                font-family: FontAwesome;
+                display: block;
+                position: absolute;
+                color: #c80000;
+                font-size: 16px;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+                right: 8px;
+            }
+            .alert-validate:hover:before {
+                visibility: visible;
+                opacity: 1;
+            }
+            @media (max-width: 992px) {
+                .alert-validate::before {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            /*[ Transition ] ----------------------------------------------------------- */
+            .trans-0-1 {
+                -webkit-transition: all 0.1s;
+                -o-transition: all 0.1s;
+                -moz-transition: all 0.1s;
+                transition: all 0.1s;
+            }
+            .trans-0-2 {
+                -webkit-transition: all 0.2s;
+                -o-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                transition: all 0.2s;
+            }
+            .trans-0-3 {
+                -webkit-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+            .trans-0-4 {
+                -webkit-transition: all 0.4s;
+                -o-transition: all 0.4s;
+                -moz-transition: all 0.4s;
+                transition: all 0.4s;
+            }
+            .trans-0-5 {
+                -webkit-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+            .trans-0-6 {
+                -webkit-transition: all 0.6s;
+                -o-transition: all 0.6s;
+                -moz-transition: all 0.6s;
+                transition: all 0.6s;
+            }
+            .trans-0-9 {
+                -webkit-transition: all 0.9s;
+                -o-transition: all 0.9s;
+                -moz-transition: all 0.9s;
+                transition: all 0.9s;
+            }
+            .trans-1-0 {
+                -webkit-transition: all 1s;
+                -o-transition: all 1s;
+                -moz-transition: all 1s;
+                transition: all 1s;
+            }
+            #first_name {
+                text-transform: capitalize;
+            }
+            ::-webkit-input-placeholder {
+                text-transform: none;
+            }
+            :-moz-placeholder {
+                text-transform: none;
+            }
+            ::-moz-placeholder {
+                text-transform: none;
+            }
+            :-ms-input-placeholder {
+                text-transform: none;
+            }
+    </style>
+
+    <div class="container-contact2" style="background: transparent !important;">
+            <form class="formulario-sales-force" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" style="max-width:300px; background: #e5e5e5; border-radius: 10px; overflow: hidden; padding: 30px 30px 20px 30px; box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <input type=hidden name="oid" value="00D41000001Q9k8">
+                <input type=hidden name="retURL" value="https://www.estrategiaconcursos.com.br/gratis/sucesso/">
+        
+                <section style="display: none;">
+                    <input id="Cidade_OrigemIP__c" maxlength="200" name="Cidade_OrigemIP__c" size="20" type="text" /><br>
+                    <input id="Estado_OrigemIP__c" maxlength="200" name="Estado_OrigemIP__c" size="20" type="text" /><br>
+                    <input name="Modo_de_entrada__c" id="Modo_de_entrada__c" maxlength="255" size="20" value="landing-page">
+                    <input name="lead_source" id="lead_source" maxlength="255" size="20" value="Landing Page">
+                    <input name="Interesse_Geral__c" id="Interesse_Geral__c" maxlength="255" size="20" value="web">
+                    <input name="Area_de_Interesse__c" id="Area_de_Interesse__c" maxlength="30" size="20" value="administrativo">
+                    <input name="Concurso_de_Interesse__c" id="Concurso_de_Interesse__c" maxlength="255" size="20" value="">
+                    <input name="Interesse_Evento__c" id="Interesse_Evento__c" maxlength="255" size="20" value="">
+                    <select id="RecordTypeId" name="RecordTypeId">
+                        <option value="01241000001AP21">Lead Marketing</option>
+                    </select>
+                </section>
+        
+                <div class="wrap-input2 validate-input">
+                    <input id="first_name" class="input2" maxlength="40" name="first_name" size="20" type="text" style="color: #0D3968; background: #e5e5e5; border: none;" required>
+                    <span name="first_name" id="first_name" class="focus-input2" data-placeholder="NOME" for="LastName"></span>
+                </div>
+        
+                <div class="wrap-input2 validate-input">
+                    <input id="email" class="input2" maxlength="80" name="email" size="20" type="email" style="color: #0D3968; background: #e5e5e5; border: none;" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" required />
+                    <span class="focus-input2" data-placeholder="EMAIL"></span>
+                </div>
+        
+                <div class="wrap-input2 validate-input">
+                    <input id="phone" class="input2" name="phone" type="text" style="color: #0D3968; background: #e5e5e5; border: none;" required/>
+                    <span name="Phone" id="phone" class="focus-input2" data-placeholder="TELEFONE" minlength="5"  style="color: #0D3968;"></span>
+                </div>
+        
+                <div style="display: flex; margin-bottom: 10px;">
+                    <input class="hidden-xs-up" id="cbx" type="checkbox" checked="checked" required />
+                    <label class="cbx" for="cbx"></label>
+                    <label class="lbl" for="cbx" style="color: #595959; font-size: 0.6em; line-height: 1.5; font-family: 'Poppins', sans-serif;">
+                        Você concorda com a nossa <a class="texto-politica-privacidade" href="https://www.estrategiaconcursos.com.br/gratis/politica-de-privacidade/" target="_blank" style="text-decoration: none; color: #2316E8;">Política de Privacidade</a> e aceita receber informações adicionais do Estratégia Educacional.
+        
+                    </label>
+                </div>
+        
+                <div class="container-contact2-form-btn">
+                    <div class="wrap-contact2-form-btn">
+                        <div class="contact2-form-bgbtn"></div>
+                        <button class="contact2-form-btn" name="submit" type="submit">
+                            <b>Inscreva-se gratuitamente</b>
+                        </button>
+                    </div>
+                </div>
+        
+                <div style="padding-left: 5px;">
+                    <p style="color: #595959; font-size: 0.6em; line-height: 1.5; font-family: 'Poppins', sans-serif; padding: 10px 0px 0px 0px;">Os seus dados não serão vendidos ou compartilhados com terceiros. </p>
+                </div>
+            </form>
+        </div>
+
+    <script>
+    /* ===== Valida Email exemplo@exemplo.com.br ===== */
+    function validarEmail(email) {
+    var re = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    return re.test(email);
+    }
+    function beforeSubmit(){
+    var email = $('.validate-input input[name="email"]'); 
+    var emailStr = email.val().trim();
+    if(!validarEmail(emailStr)) {
+    showValidate(email);
+    check=false;
+    }
+    return check;
+    }  
+    function showValidate(input) {
+    var thisAlert = input.parent();
+    $(thisAlert).addClass('alert-validate');
+    }
+
+
+    /* ===== Valida Telefone + Mascara ===== */
+    function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+    }
+    function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+    }
+    function mtel(v){
+    v=v.replace(/\D/g,"");
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2");
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");
+    return v;
+    }
+    function id( el ){
+    return document.getElementById( el );
+    }
+    window.onload = function(){
+    id('phone').onkeypress = function(){
+        mascara( this, mtel );
+    }
+    }
+
+
+    /* ===== Capta Cidade e Estado através do ===== */
+    jQuery.getJSON('https://extreme-ip-lookup.com/json/', function(data) {
+    jQuery("#Cidade_OrigemIP__c").val(data.city);
+    jQuery("#Estado_OrigemIP__c").val(data.region);
+    });
+
+
+    /* ===== Código que pega o tíluto da página (title) e seta no interesse_evento__c ===== */
+    var title = document.getElementsByTagName('title')[0].innerHTML;
+    if (title.includes(" |")) {
+    var resum = title.substring(0, title.indexOf(" |"));
+    document.getElementById("Interesse_Evento__c").value = resum;
+    } else {
+    document.getElementById("Interesse_Evento__c").value = title;
+    }
+    </script>
+
+    <script> 
+    /* ===== Focus Contact2 ===== */
+    (function ($) {
+    "use strict";      
+    $('.input2').each(function(){
+    $(this).on('blur', function(){
+        if($(this).val().trim() != "") {
+            $(this).addClass('has-val');
+        } else {
+            $(this).removeClass('has-val');
+        }
+    })
+    })
+    })(jQuery);
+
+
+    $(function(){
+
+    $('.contact2-form validate-form .wrap-input2 input').focusout(function(){
+
+    var text_val = $(this).val();
+
+    if(text_val === "") {
+
+    $(this).removeClass('has-value');
+
+    } else { 
+
+    $(this).addClass('has-value');
+
+    }
+
+    });
+
+    });
+
+    /* ===== Definição da Origem da Lead: NÃO RETIRAR ===== */
+    var e = document.getElementById("Modo_de_entrada__c");
+        var s = new URL(decodeURI(window.location.href)).searchParams.get("utm_source");
+        var m = new URL(decodeURI(window.location.href)).searchParams.get("utm_medium");
+        var x = document.referrer;
+
+        console.log("Referrer", x);
+        console.log("Source ou Medium", s + " / " + m);
+
+        if (s && s.length > 0) {
+            e.setAttribute("value", s + " / " + m);
+        } else {
+            if (x.includes("google")) {
+                e.setAttribute("value", "google");
+            }
+            if (x.includes("/blog/")) {
+                e.setAttribute("value", "blog");
+            }
+            if (x.includes("facebook")) {
+                e.setAttribute("value", "facebook");
+            }
+            if (x.includes("instagram")) {
+                e.setAttribute("value", "instagram");
+            }
+            if (x.includes("bing")) {
+                e.setAttribute("value", "bing");
+            }
+            if (x.includes("youtube")) {
+                e.setAttribute("value", "youtube");
+            }
+            if (x.includes("twitter")) {
+                e.setAttribute("value", "twitter");
+            }
+            if (x.includes("linkedin")) {
+                e.setAttribute("value", "linkedin");
+            }
+            if (x.includes("pinterest")) {
+                e.setAttribute("value", "pinterest");
+            }
+            if (x.includes("tumblr")) {
+                e.setAttribute("value", "tumblr");
+            }
+            if (x.includes("salesforce.com")) {
+                e.setAttribute("value", "salescloud");
+            }
+            if (x.includes("salesforce.com")) {
+                e.setAttribute("value", "salescloud");
+            }
+        }
+
+    </Script>
+</div>
